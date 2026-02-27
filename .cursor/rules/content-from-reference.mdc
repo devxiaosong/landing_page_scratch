@@ -1,0 +1,15 @@
+---
+description: tools 与 support 的 config 内容不手填，由 AI 根据参考物料文档生成
+globs: content/tools/**/*.config.ts, content/support/**/*.config.ts, docs/reference-material.md
+alwaysApply: false
+---
+
+# 从参考物料生成 tools / support 配置
+
+- **不要手填**：`content/tools/*.config.ts` 与 `content/support/*.config.ts` 的**文案、FAQ、卖点、链接等内容**不由人工直接填充。
+- **参考来源**：所有可用的文案草稿、卖点、FAQ 思路、以及**其他网站的参考链接**，统一放在 **`docs/reference-material.md`** 中。该文档内按「工具 A / 工具 B / Support 页」等分节，每节可含「文案与卖点」「参考链接」。
+- **AI 职责**：当需要**新增或更新**某个工具的 config（`ToolLandingConfig`）或 Support 的 config（`SupportPageConfig`）时：
+  1. 阅读 `docs/reference-material.md` 中对应小节（及「其他网站链接」等通用部分）。
+  2. 结合 `lib/types.ts` 中的类型定义与 `docs/landing-spec.md` 的板块与 SEO 要求。
+  3. **生成**符合类型的 `content/tools/<toolId>.config.ts` 或 `content/support/<id>.config.ts`，将参考物料中的文案与思路整理为正式 config 字段；若参考中有外部链接，可作参考，不直接写入 config（config 中只写本站需要的 URL 与文案）。
+- **不编造**：若参考物料中某工具或 Support 尚无足够文案与链接，应提示在 `docs/reference-material.md` 中补充，再生成 config，而不是凭空编造大段 copy。

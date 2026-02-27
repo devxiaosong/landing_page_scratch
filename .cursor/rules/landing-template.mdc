@@ -1,0 +1,13 @@
+---
+description: 工具落地页内容与 UI 分离、必选板块、SEO 统一从 lib/seo 生成
+alwaysApply: true
+---
+
+# 工具落地页约定
+
+- **内容与 UI 分离**：所有落地页文案、图片路径、功能列表、FAQ、价格表等**仅**存在于 `content/tools/*.config.ts`，类型见 `lib/types.ts`（`ToolLandingConfig`）。页面（`app/**/page.tsx`）与组件**不得**硬编码产品名、卖点、说明文字。
+- **必选板块**：每个工具落地页必须展示 hero、whySection、howSection、features、guide、pricing、testimonials、faq、cta；secureSection 可选。板块顺序可调，但不可缺失。详见 `docs/landing-spec.md`。
+- **SEO 统一入口**：页面 metadata 必须通过 `buildToolMetadata(config)` 生成；SoftwareApplication JSON-LD 必须通过 `buildSoftwareApplicationJsonLd(config)` 生成并注入。不在页面或组件内手写 `<title>`、`<meta name="description">`、`openGraph`、`twitter` 或 JSON-LD 内容。
+- **新增工具页**：新增 `content/tools/<toolId>.config.ts` 导出符合 `ToolLandingConfig` 的 config，页面中 `import` 该 config，用 `buildToolMetadata(config)` 导出 metadata，并按板块顺序渲染组件（数据均从 config 解构传入）。同时将新页 URL 加入 `app/sitemap.ts`。**config 文案不手填**：由 AI 根据 `docs/reference-material.md` 中的参考物料（文案 + 其他网站链接）生成，见 `.cursor/rules/content-from-reference.mdc`。
+- **Support 页**：内容来自 `content/support/*.config.ts`，类型 `SupportPageConfig`（`lib/types.ts`）。metadata 必须通过 `buildSupportMetadata(config)` 生成，页面从 config 读数据并传给 `SupportContent`、`ContactCard`。**Support 的 config 文案也不手填**：由 AI 根据 `docs/reference-material.md` 中 Support 小节生成。
+- **占位组件**：`app/components/` 当前为占位（仅 `data-section`、`aria-label` 与注释）。重建 UI 时只改组件内部样式与结构，保留 props 与 page 的数据流不变；内容仍仅来自 config 或 content。

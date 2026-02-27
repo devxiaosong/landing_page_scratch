@@ -1,0 +1,23 @@
+---
+description: 改版/换 UI 时只改样式与布局，不修改内容；内容仅来自 content/ 与 config
+globs: app/**/*
+alwaysApply: false
+---
+
+# 改样式时保持内容不变
+
+在 `app/` 下做**视觉或布局改版**（换 UI、改样式、改组件结构）时：
+
+- **只改**：样式（CSS/Tailwind）、布局（flex/grid/顺序）、组件拆分与组合、动画与交互、class 与 style。
+- **不要改**：任何**文案、数据、列表、标题、描述、FAQ、产品名、链接文字**。这些内容**仅**来自：
+  - 工具落地页：`content/tools/*.config.ts`（`ToolLandingConfig`）
+  - Support 页：`content/support/*.config.ts`（`SupportPageConfig`）
+  - 博客：`content/` 下 Markdown（由 `lib/posts.ts` 从 content 目录读取）
+  - 法律页：对应 `*Content` 占位组件内的正文或数据源（当前未迁到 content；若未来抽到 `content/legal` 则只改 content）
+
+**操作约定**：
+- 页面（`app/**/page.tsx`）只负责从 config 读数据并传给组件，不写死任何 copy。
+- 组件只接收 props 并渲染，不内联文案；文案/列表/FAQ 等一律来自 props（即来自 config）。
+- 若需改文案、标题、FAQ、产品名等，只改 `content/` 或 `content/tools/*.config.ts`、`content/support/*.config.ts`，**不要**在 `app/` 或 `app/components/` 里改内容。
+
+这样下次 AI 或人工「只实现样式」时，只需动 `app/` 下的样式与结构，内容保持不变。
