@@ -6,7 +6,7 @@ alwaysApply: false
 
 # 从参考物料生成配置与内容
 
-**唯一来源**：`docs/reference-material.md`。所有文案、FAQ、卖点、正文、品牌信息均来自此文档，**不手填、不凭空编造**。
+**主要来源**：`docs/reference-material.md`。所有文案、FAQ、卖点、正文、品牌信息以此文档为基础，**不手填**。
 
 ## 覆盖范围
 
@@ -22,7 +22,8 @@ alwaysApply: false
 1. 阅读 `docs/reference-material.md` 中**对应小节**（及「通用参考链接」节）。
 2. 对照 `lib/types.ts` 类型定义；legal 页额外参考下方 frontmatter 格式。
 3. 生成或覆盖对应文件，将参考物料整理为正式字段；外部参考链接只用于理解，**不直接写入输出文件**。
-4. 若某节**参考物料不足**（缺标题、缺正文思路等），停下来提示用户在 `docs/reference-material.md` 补充，**不编造**。
+4. **内容创作策略**：用户只需提供工具名称、功能描述、目标用户、需要覆盖的关键词、参考链接等基础信息，**其余所有文案（主标题、一句话价值、Why/How 板块、功能点、使用步骤、用户评价、FAQ、CTA 等）由 AI 根据以上输入自主创作**，风格参照 `content/tools/` 下已有 config 的文案水准，**不停下来询问用户补充，直接生成**。
+5. 生成文案时须将用户指定的**关键词自然融入**标题、描述、FAQ 等字段，确保 SEO 覆盖。
 
 ## legal 页 Markdown frontmatter 格式
 
