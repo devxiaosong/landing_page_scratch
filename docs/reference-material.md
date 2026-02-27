@@ -65,6 +65,77 @@
 
 ---
 
+## Site 品牌信息
+
+> 填写后，AI 据此生成 / 更新 `content/site.config.ts`（`SiteConfig`）。
+
+- 产品名（name）：
+- 工作室 / 公司名（studioName，用于版权行）：
+- Slogan（siteConfig.slogan，Footer 品牌列副标题）：
+- 默认 OG 图路径（defaultOgImage）：
+- 默认 title（首页无覆盖时显示）：
+- 默认 description（≤160 字符）：
+- Google Search Console 验证码（googleVerification，选填）：
+
+---
+
+## Legal Pages
+
+> 每个法律页一个子节。填写后，AI 据此生成 `content/legal/<slug>.md`。
+> 正文可以是要点列表或段落草稿，AI 会整理为规范 Markdown；
+> 若某页完全没有草稿，请先在此补充再让 AI 生成。
+
+### statement
+
+- label（Footer 显示名）：Statement
+- order：1
+- SEO description 思路：
+- 正文要点 / 草稿：
+
+### license-agreement
+
+- label：License Agreement
+- order：2
+- SEO description 思路：
+- 正文要点 / 草稿：
+
+### terms-of-use
+
+- label：Terms of Use
+- order：3
+- SEO description 思路：
+- 正文要点 / 草稿：
+
+### privacy-policy
+
+- label：Privacy Policy
+- order：4
+- SEO description 思路：
+- 正文要点 / 草稿：
+
+### refund-policy
+
+- label：Refund Policy
+- order：5
+- SEO description 思路：
+- 正文要点 / 草稿：
+
+### cookies
+
+- label：Cookies
+- order：6
+- SEO description 思路：
+- 正文要点 / 草稿：
+
+### shipping-policy
+
+- label：Shipping Policy
+- order：7
+- SEO description 思路：
+- 正文要点 / 草稿：
+
+---
+
 ## 其他网站链接（通用参考）
 
 - 

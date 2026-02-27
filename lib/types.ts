@@ -255,6 +255,8 @@ export interface BlogConfig {
 export interface SiteConfig {
   /** 站点名称，用于 OG siteName、title template 等 */
   name: string;
+  /** 版权声明中的工作室/公司名称，如 "MassLoader Studio" */
+  studioName: string;
   /** Next.js title template，%s 为页面标题占位符 */
   titleTemplate: string;
   /** 默认 title（无页面覆盖时使用） */

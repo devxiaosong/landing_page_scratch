@@ -1,15 +1,50 @@
 ---
-description: tools 与 support 的 config 内容不手填，由 AI 根据参考物料文档生成
-globs: content/tools/**/*.config.ts, content/support/**/*.config.ts, docs/reference-material.md
+description: 所有 config 与 legal 内容不手填，由 AI 根据参考物料文档生成
+globs: content/tools/**/*.config.ts, content/support/**/*.config.ts, content/legal/**/*.md, content/site.config.ts, docs/reference-material.md
 alwaysApply: false
 ---
 
-# 从参考物料生成 tools / support 配置
+# 从参考物料生成配置与内容
 
-- **不要手填**：`content/tools/*.config.ts` 与 `content/support/*.config.ts` 的**文案、FAQ、卖点、链接等内容**不由人工直接填充。
-- **参考来源**：所有可用的文案草稿、卖点、FAQ 思路、以及**其他网站的参考链接**，统一放在 **`docs/reference-material.md`** 中。该文档内按「工具 A / 工具 B / Support 页」等分节，每节可含「文案与卖点」「参考链接」。
-- **AI 职责**：当需要**新增或更新**某个工具的 config（`ToolLandingConfig`）或 Support 的 config（`SupportPageConfig`）时：
-  1. 阅读 `docs/reference-material.md` 中对应小节（及「其他网站链接」等通用部分）。
-  2. 结合 `lib/types.ts` 中的类型定义与 `docs/landing-spec.md` 的板块与 SEO 要求。
-  3. **生成**符合类型的 `content/tools/<toolId>.config.ts` 或 `content/support/<id>.config.ts`，将参考物料中的文案与思路整理为正式 config 字段；若参考中有外部链接，可作参考，不直接写入 config（config 中只写本站需要的 URL 与文案）。
-- **不编造**：若参考物料中某工具或 Support 尚无足够文案与链接，应提示在 `docs/reference-material.md` 中补充，再生成 config，而不是凭空编造大段 copy。
+**唯一来源**：`docs/reference-material.md`。所有文案、FAQ、卖点、正文、品牌信息均来自此文档，**不手填、不凭空编造**。
+
+## 覆盖范围
+
+| 需要生成 / 更新的文件 | 参考物料对应节 | 类型 / 格式约束 |
+|---|---|---|
+| `content/tools/<id>.config.ts` | `## 工具：<名称>` | `ToolLandingConfig`（`lib/types.ts`） |
+| `content/support/<id>.config.ts` | `## Support 页` | `SupportPageConfig`（`lib/types.ts`） |
+| `content/legal/<slug>.md` | `## Legal Pages` 下对应子节 | Markdown + frontmatter（见下） |
+| `content/site.config.ts` | `## Site 品牌信息` | `SiteConfig`（`lib/types.ts`） |
+
+## AI 操作流程
+
+1. 阅读 `docs/reference-material.md` 中**对应小节**（及「通用参考链接」节）。
+2. 对照 `lib/types.ts` 类型定义；legal 页额外参考下方 frontmatter 格式。
+3. 生成或覆盖对应文件，将参考物料整理为正式字段；外部参考链接只用于理解，**不直接写入输出文件**。
+4. 若某节**参考物料不足**（缺标题、缺正文思路等），停下来提示用户在 `docs/reference-material.md` 补充，**不编造**。
+
+## legal 页 Markdown frontmatter 格式
+
+```md
+---
+title: "Privacy Policy — {siteConfig.name}"   # SEO <title>
+description: "..."                             # SEO <meta description>，≤160 字符
+label: "Privacy Policy"                        # Footer 显示名称
+order: 4                                       # Footer 排序，数字越小越靠前
+---
+
+正文（Markdown）...
+```
+
+## 排序约定（legal 页 order 参考值）
+
+| slug | label | order |
+|---|---|---|
+| statement | Statement | 1 |
+| license-agreement | License Agreement | 2 |
+| terms-of-use | Terms of Use | 3 |
+| privacy-policy | Privacy Policy | 4 |
+| refund-policy | Refund Policy | 5 |
+| cookies | Cookies | 6 |
+| shipping-policy | Shipping Policy | 7 |
