@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { BASE_URL } from "@/lib/config";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import PageHero from "../components/PageHero";
 import PrivacyPolicyContent from "../components/PrivacyPolicyContent";
 
 export const metadata: Metadata = {
@@ -21,20 +22,10 @@ export default function PrivacyPolicyPage() {
   return (
     <div>
       <Header />
-      
-      {/* Hero Banner */}
-      <section 
-        className="py-16 md:py-20"
-        style={{ background: "linear-gradient(180deg, rgba(97,100,255,0.05) 0%, rgba(122,50,253,0.05) 100%)" }}
-      >
-        <div className="container mx-auto max-w-[1310px] px-4">
-          <h1 className="text-[#7A32FD] text-3xl md:text-5xl md:leading-[58px] text-center font-bold">
-            Privacy Policy
-          </h1>
-        </div>
-      </section>
 
-      {/* Privacy Policy Content */}
+      {/* 此处插入内页 Hero */}
+      <PageHero title="Privacy Policy" />
+
       <PrivacyPolicyContent />
 
       <Footer />
