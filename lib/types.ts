@@ -222,6 +222,51 @@ export interface ToolLandingConfig {
   cta: CTASection;
 }
 
+// ── 简单静态页配置（法律页、下载页等）─────────────────────────────────────
+
+export interface SimplePageConfig {
+  title: string;
+  description: string;
+  /** canonical 路径（含尾部斜杠，如 "/cookie-policy/"） */
+  canonicalPath: string;
+  robots?: {
+    index?: boolean;
+    follow?: boolean;
+  };
+  openGraph?: {
+    title?: string;
+    description?: string;
+  };
+}
+
+// ── 博客配置 ────────────────────────────────────────────────────────────────
+
+export interface BlogConfig {
+  /** 博客首页描述 */
+  indexDescription: string;
+  /** 分类页描述模板，{label} 为分类名占位符 */
+  categoryDescriptionTemplate: string;
+  /** 博客路径前缀，用于 canonical（不含尾部斜杠，如 "/blog"） */
+  basePath: string;
+}
+
+// ── 站点级全局配置 ──────────────────────────────────────────────────────────
+
+export interface SiteConfig {
+  /** 站点名称，用于 OG siteName、title template 等 */
+  name: string;
+  /** Next.js title template，%s 为页面标题占位符 */
+  titleTemplate: string;
+  /** 默认 title（无页面覆盖时使用） */
+  defaultTitle: string;
+  /** 默认 description */
+  defaultDescription: string;
+  /** 默认 OG 图路径（相对或绝对 URL） */
+  defaultOgImage: string;
+  /** Google Search Console 验证码 */
+  googleVerification?: string;
+}
+
 // ── Support 页 ─────────────────────────────────────────────────────────────
 
 export interface SupportFAQItem {

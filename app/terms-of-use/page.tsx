@@ -1,22 +1,12 @@
 import type { Metadata } from "next";
-import { BASE_URL } from "@/lib/config";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import PageHero from "../components/PageHero";
 import TermsOfUseContent from "../components/TermsOfUseContent";
+import { termsOfUsePageConfig } from "@/content/pages.config";
+import { buildSimplePageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Term Of Service — MassLoader",
-  description:
-    "Read MassLoader's Terms of Service. Understand your rights and obligations when accessing and using MassLoader's website and software services.",
-  alternates: {
-    canonical: `${BASE_URL}/term-of-service/`,
-  },
-  robots: {
-    index: true,
-    follow: false,
-  },
-};
+export const metadata: Metadata = buildSimplePageMetadata(termsOfUsePageConfig);
 
 export default function TermsOfUsePage() {
   return (

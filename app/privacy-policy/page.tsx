@@ -1,22 +1,12 @@
 import type { Metadata } from "next";
-import { BASE_URL } from "@/lib/config";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import PageHero from "../components/PageHero";
 import PrivacyPolicyContent from "../components/PrivacyPolicyContent";
+import { privacyPolicyPageConfig } from "@/content/pages.config";
+import { buildSimplePageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy — MassLoader",
-  description:
-    "Read MassLoader's Privacy Policy. Learn how we collect, use, and protect your personal information when you use our video downloader software.",
-  alternates: {
-    canonical: `${BASE_URL}/privacy-policy/`,
-  },
-  robots: {
-    index: true,
-    follow: false,
-  },
-};
+export const metadata: Metadata = buildSimplePageMetadata(privacyPolicyPageConfig);
 
 export default function PrivacyPolicyPage() {
   return (

@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
-import { BASE_URL } from "@/lib/config";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import PageHero from "../../components/PageHero";
 import BlogListContent from "../../components/BlogListContent";
 import { getPostsByCategory, getAllCategories } from "@/lib/posts";
+import { blogConfig } from "@/content/blog.config";
+import { buildBlogCategoryMetadata } from "@/lib/seo";
 
 interface Props {
   params: { category: string };
@@ -19,34 +20,7 @@ export async function generateMetadata({ params }: Props) {
   const categories = getAllCategories();
   const cat = categories.find((c) => c.slug === params.category);
   if (!cat) return {};
-  return {
-    title: `${cat.label} — MassLoader Blog`,
-    description: `Browse all ${cat.label} articles and guides on MassLoader Blog.`,
-    alternates: {
-      canonical: `${BASE_URL}/blog/${params.category}/`,
-    },
-    openGraph: {
-      title: `${cat.label} — MassLoader Blog`,
-      description: `Browse all ${cat.label} articles and guides on MassLoader Blog.`,
-      url: `${BASE_URL}/blog/${params.category}/`,
-      images: [
-        {
-          url: "/images/og-default.png",
-          width: 1200,
-          height: 630,
-          alt: `MassLoader Blog — ${cat.label}`,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image" as const,
-      title: `${cat.label} — MassLoader Blog`,
-      description: `Browse all ${cat.label} articles and guides on MassLoader Blog.`,
-      images: [
-        "/images/og-default.png",
-      ],
-    },
-  };
+  return buildBlogCategoryMetadata(blogConfig, cat);
 }
 
 export default function CategoryPage({ params }: Props) {
